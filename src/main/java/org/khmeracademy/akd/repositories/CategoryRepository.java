@@ -28,7 +28,7 @@ public interface CategoryRepository {
 	@Delete("UPDATE akd_categories SET status = 0 WHERE cat_id=#{id}")
 	boolean delete(String id);
 	
-	@Update("UPDATE akd_categories SET name=#{catName},created_date=#{createdDate},remark=#{remark},parent_id=#{parentID},status=#{status},icon=#{icon} WHERE cat_id=#{catID}")
+	@Update("UPDATE akd_categories SET name=#{catName},created_date=#{createdDate},remark=#{remark},parent_id=#{parentID},status=#{status},icon=#{icon},rang_order=#{order} WHERE cat_id=#{catID}")
 	boolean update(Category cat);
 	
 	
