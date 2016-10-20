@@ -16,7 +16,8 @@ public interface DocumentService {
 	
 	ArrayList<Object> findAll(Paging pagination);
 	
-	ArrayList<Document> getDocumentByCatID(String CatID);
+	/*ArrayList<Document> getDocumentByCatID(String CatID);*/
+	ArrayList<Document> getDocumentByCatID(String CatID,Paging pagination);
 	
 	ArrayList<Document> getDocByUser(int userID, int docTypeNum);
 	

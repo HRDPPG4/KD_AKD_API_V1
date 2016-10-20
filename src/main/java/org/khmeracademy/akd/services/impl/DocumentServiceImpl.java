@@ -46,9 +46,16 @@ public class DocumentServiceImpl implements DocumentService{
 	
 	
 	
-	@Override
+	/*@Override
 	public ArrayList getDocumentByCatID(String CatID) {
+		
 		return documentRepository.getDocumentByCatID(CatID);
+	}*/
+	
+	@Override
+	public ArrayList getDocumentByCatID(String CatID,Paging pagination) {
+		pagination.setTotalCount(documentRepository.countTotalDocByCatID(CatID));
+		return documentRepository.getDocumentByCatID(CatID,pagination);
 	}
 	
 	
@@ -136,7 +143,6 @@ public class DocumentServiceImpl implements DocumentService{
 
 	@Override
 	public ArrayList<Document> getAllDocumentByStatus(int status,Paging pagination) {
-		//pagination.setTotalCount(documentRepository.count());
 		pagination.setTotalCount(documentRepository.countTotalDocByStatus(status));
 		return documentRepository.getAllDocumentByStatus(status,pagination);
 	}

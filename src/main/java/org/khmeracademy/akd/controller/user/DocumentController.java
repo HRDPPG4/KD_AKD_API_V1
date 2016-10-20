@@ -155,7 +155,7 @@ public class DocumentController {
 		return res;
 	}
 	
-	@RequestMapping(value="/getDocumentByCatID/{CatID}",method=RequestMethod.GET)
+	/*@RequestMapping(value="/getDocumentByCatID/{CatID}",method=RequestMethod.GET)
 	public ResponseList<Document> getDocumentByCatID(@PathVariable("CatID") String CatID)
 	{
 		ArrayList<Document> doc=documentService.getDocumentByCatID(CatID);
@@ -165,6 +165,26 @@ public class DocumentController {
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(doc);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+				
+		return res;
+	}*/
+	
+	@RequestMapping(value="/getDocumentByCatID",method=RequestMethod.GET)
+	public ResponseList<Document> getDocumentByCatID(@RequestParam("catID") String CatID,Paging pagination)
+	{
+		ArrayList<Document> doc=documentService.getDocumentByCatID(CatID,pagination);
+		ResponseList<Document> res=new ResponseList<Document>();
+		
+		if(doc.size()>0){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(doc);
+			res.setPaging(pagination);
 		}
 		else{
 			res.setCode(ResponseCode.RECORD_NOT_FOUND);
