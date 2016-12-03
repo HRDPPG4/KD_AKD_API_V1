@@ -25,4 +25,6 @@ public interface CategoryService {
 	
 	int getCategoryCount();
 	
+	ArrayList<Category> getAllCategoryByLevel(int level);
+	
 }

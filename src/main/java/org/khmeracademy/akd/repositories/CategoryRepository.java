@@ -59,7 +59,7 @@ public interface CategoryRepository {
 	ArrayList<Category>getAllCategoryByLimit(@Param("pagination") Paging pagination);
 	
 	
-	@Select("SELECT * FROM akd_categories WHERE cat_id NOT IN ('0B4RhbtI4DXY_QWVOWkFiSTlRY1E') ORDER BY name ASC ")
+	@Select("SELECT * FROM akd_categories ORDER BY name ASC ")
 	@Results({
 		@Result(property="catID", column="cat_id"),
 		@Result(property="catName", column="name"),
@@ -135,6 +135,9 @@ public interface CategoryRepository {
 		@Result(property="icon", column="icon"),
 		@Result(property="order", column="rang_order"),
 		/*@Result(property="totalDoc", column="total_doc")*/
+		@Result(property="subCategories", column="cat_id"  
+		, many = @Many(select = "getCategoryByParentIDAndStatusEnable")
+		),
 		@Result(property="totalDoc", column="cat_id", one = @One(select = "getTotalDocByCatID"))
 			
 	})
@@ -162,6 +165,23 @@ public interface CategoryRepository {
 	})
 	//	NOW WE GET BY STATUS ENDABLE
 	int getTotalDocByCatID(String catID);
+	
+	
+	@Select("SELECT * FROM akd_categories WHERE level=#{level} ORDER BY name ASC ")
+	@Results({
+		@Result(property="catID", column="cat_id"),
+		@Result(property="catName", column="name"),
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="remark", column="remark"),
+		@Result(property="parentID", column="parent_id"),
+		@Result(property="status", column="status"),
+		@Result(property="icon", column="icon"),
+		@Result(property="order", column="rang_order"),
+		/*@Result(property="totalDoc", column="total_doc"),*/
+		@Result(property="totalDoc", column="cat_id", one = @One(select = "getTotalDocByCatID")),
+		@Result(property="level", column="level")
+	})
+	ArrayList<Category>getAllCategoryByLevel(@Param("level") int level);
 	
 	
 	

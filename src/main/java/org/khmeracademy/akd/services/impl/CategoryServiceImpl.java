@@ -77,5 +77,10 @@ public class CategoryServiceImpl implements CategoryService{
 		return categoryRepository.getCategoryCount();
 	}
 
+	@Override
+	public ArrayList<Category> getAllCategoryByLevel(int level) {
+		return categoryRepository.getAllCategoryByLevel(level);
+	}
+
 	
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -207,6 +208,25 @@ public class CategoryController {
 			res.setMessage();
 		}
 		
+		return res;
+	}
+	
+	@RequestMapping(value="/getAllCatByLevel",method=RequestMethod.GET)
+	public ResponseList<Category> getAllCategoryByLevel(@RequestParam("level") int level)
+	{
+		ArrayList<Category> cat=categoryService.getAllCategoryByLevel(level);
+		ResponseList<Category> res=new ResponseList<Category>();
+		
+		if(categoryService.getAllCategoryByLevel(level)!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(cat);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+				
 		return res;
 	}
 	
