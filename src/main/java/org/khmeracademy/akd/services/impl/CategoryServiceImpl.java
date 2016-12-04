@@ -82,5 +82,10 @@ public class CategoryServiceImpl implements CategoryService{
 		return categoryRepository.getAllCategoryByLevel(level);
 	}
 
+	@Override
+	public int countSubCatByParentID(String parentID) {
+		return categoryRepository.countSubCatByParentID(parentID);
+	}
+
 	
 }

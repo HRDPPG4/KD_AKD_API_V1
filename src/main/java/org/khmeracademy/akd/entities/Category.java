@@ -44,6 +44,19 @@ public class Category {
 	@JsonProperty("CAT_LEVEL")
 	private int level;
 	
+	@JsonProperty("TOTAL_SUB")
+	private int totalSub;
+	
+	public int getTotalSub() {
+		return totalSub;
+	}
+
+
+	public void setTotalSub(int totalSub) {
+		this.totalSub = totalSub;
+	}
+
+
 	public Category() {
 		
 	}

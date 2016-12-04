@@ -71,7 +71,8 @@ public interface CategoryRepository {
 		@Result(property="order", column="rang_order"),
 		/*@Result(property="totalDoc", column="total_doc"),*/
 		@Result(property="totalDoc", column="cat_id", one = @One(select = "getTotalDocByCatID")),
-		@Result(property="level", column="level")
+		@Result(property="level", column="level"),
+		@Result(property="totalSub", column="cat_id", one = @One(select = "countSubCatByParentID"))
 	})
 	ArrayList<Category>findAll();
 	
@@ -105,7 +106,8 @@ public interface CategoryRepository {
 		@Result(property="totalDoc", column="cat_id", one = @One(select = "getTotalDocByCatID")),
 		@Result(property="subCategories", column="cat_id"  
 			, many = @Many(select = "getCategoryByParentIDAndStatusEnable")
-		)
+		),
+		@Result(property="totalSub", column="cat_id", one = @One(select = "countSubCatByParentID"))
 	})
 	ArrayList<Category>getCategoryByParentID(String ParentID);
 	
@@ -138,7 +140,8 @@ public interface CategoryRepository {
 		@Result(property="subCategories", column="cat_id"  
 		, many = @Many(select = "getCategoryByParentIDAndStatusEnable")
 		),
-		@Result(property="totalDoc", column="cat_id", one = @One(select = "getTotalDocByCatID"))
+		@Result(property="totalDoc", column="cat_id", one = @One(select = "getTotalDocByCatID")),
+		@Result(property="totalSub", column="cat_id", one = @One(select = "countSubCatByParentID"))
 			
 	})
 	ArrayList<Category>getCategoryByParentIDAndStatusEnable(String ParentID);
@@ -182,6 +185,12 @@ public interface CategoryRepository {
 		@Result(property="level", column="level")
 	})
 	ArrayList<Category>getAllCategoryByLevel(@Param("level") int level);
+	
+	@Select("SELECT COUNT(*) FROM akd_categories WHERE parent_id=#{catID}")
+	@Results({
+		@Result(property="catID", column="count"),
+	})
+	int countSubCatByParentID(String catID);
 	
 	
 	

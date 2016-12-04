@@ -230,4 +230,22 @@ public class CategoryController {
 		return res;
 	}
 	
+	@RequestMapping(value="/countSubCatByParentID",method=RequestMethod.GET)
+	public Response countSubCatByParentID(@RequestParam("parentID") String parentID)
+	{
+		int count =categoryService.countSubCatByParentID(parentID);
+		Response res=new Response();
+		if(count>0){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setCount(count);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+		
+		return res;
+	}
+	
 }
