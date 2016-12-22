@@ -25,8 +25,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
-
-
 @Configuration
 @EnableWebMvc
 @EnableSwagger2
@@ -117,7 +115,7 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter{
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-		viewResolver.setPrefix("/WEB-INF/");
+		viewResolver.setPrefix("/WEB-INF/pages/");
 		viewResolver.setSuffix(".jsp");
 		registry.viewResolver(viewResolver);
 	}

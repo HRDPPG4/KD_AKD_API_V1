@@ -28,8 +28,4 @@ public class MybatisConfiguration {
 		return new DataSourceTransactionManager(dataSource);
 	}
 	
-	
-	
-	
-	
 }
